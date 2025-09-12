@@ -18,7 +18,7 @@
   width: 80%; 
   height: 100%;
   max-width: 600px;
-  max-height: 600px;
+  max-height: 500px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
@@ -33,3 +33,44 @@
 .cadastroClose:hover{
   color: red;
 }
+
+#modal-cadastro {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+#modal-cadastro form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+#modal-cadastro form input{
+  width: 300px;
+  height: 35px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+@media (max-width: 400px) {
+  #modal-cadastro {
+    flex-direction: column;
+  }
+}
+
+#botao-cadastrar {
+  background-color: #4CAF50; 
+  color: white; 
+  padding: 10px 20px; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  font-size: 16px; 
+  margin-top: 15px; 
+  max-width: 100px;
+} 
+

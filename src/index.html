@@ -15,18 +15,21 @@
 
 
   <!-- Item 01 - Criar uma página inicial com um campo de digitação de e-mail e um botão 'Avançar' -->
-  <form id="insere-email">
-    <input type="text" placeholder="E-mail" id="email" required>
-    <button type="submit" id="botao-avancar">Avançar</button>
-  </form>
+  <div id="formulario-email">
+    <form id="insere-email">
+      <input type="text" placeholder="E-mail" id="email" required>
+      <button type="submit" id="botao-avancar">Avançar</button>
+    </form>
+  </div>
   
   <!-- *Item 03 - Se o e-mail já existir, direcione o usuário para a página de senha para autenticação -->
   <div id="modal-senha">
     <div id="modal-senha-conteudo">
-      <span class="close">&times;</span>
+      <span class="senhaClose">&times;</span>
+      <h2>Informe sua senha</h2>
       <form class="form-senha">
         <input type="text" placeholder="Senha" id="senha" required>
-        <button type="submit" id="botao-autenticar">Login</button>
+        <button type="submit" id="botao-senha">Login</button>
       </form>
     </div>
   </div>
