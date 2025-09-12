@@ -3,9 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="../src/styles/index.css">
+  <link rel="stylesheet" href="../src/styles/modal-senha.css">
+  <link rel="stylesheet" href="../src/styles/modal-cadastro.css">
+  <title>Cadastro de usuário</title>
 </head>
 <body>
+
+  <button id="btnCadastrar">Cadastrar</button>
+  <button id="btnSenha">Senha</button>
+
+
+  <!-- Item 01 - Criar uma página inicial com um campo de digitação de e-mail e um botão 'Avançar' -->
+  <form id="insere-email">
+    <input type="text" placeholder="E-mail" id="email" required>
+    <button type="submit" id="botao-avancar">Avançar</button>
+  </form>
   
+  <!-- *Item 03 - Se o e-mail já existir, direcione o usuário para a página de senha para autenticação -->
+  <div id="modal-senha">
+    <div id="modal-senha-conteudo">
+      <span class="close">&times;</span>
+      <form class="form-senha">
+        <input type="text" placeholder="Senha" id="senha" required>
+        <button type="submit" id="botao-autenticar">Login</button>
+      </form>
+    </div>
+  </div>
+
+<!-- *Item 04 - Se o e-mail não existir, abrir um formulário de cadastro -->
+  <div id="modal-cadastro">
+    <div id="modal-cadastro-conteudo">
+      <span class="cadastroClose">&times;</span>
+      <h2>Cadastro de Usuário</h2>
+      <form>
+        <input type="text" placeholder="E-mail" id="email-cadastro" required>
+        <input type="text" placeholder="Nome" id="nome-cadastro" required>
+        <input type="text" placeholder="Telefone" id="telefone-cadastro" required>
+        <input type="text" placeholder="Endereço" id="endereco-cadastro" required>
+        <input type="text" placeholder="CPF" id="cpf-cadastro" required>
+        <input type="text" placeholder="Senha" id="senha-cadastro" required>
+        <button type="submit" class="btnCadastrar" id="botao-cadastrar">Cadastrar</button>
+      </form>
+    </div>
+  </div>
+<script  type="module"  src="controller.js"></script>
 </body>
 </html>
