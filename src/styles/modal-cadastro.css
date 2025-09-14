@@ -74,3 +74,15 @@
   max-width: 100px;
 } 
 
+/* Remove as setas para Chrome, Safari e Edge */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important; /* Opcional: remove o espaço vazio que as setas deixavam */
+}
+
+/* Remove as setas para Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}

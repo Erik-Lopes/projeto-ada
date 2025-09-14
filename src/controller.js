@@ -33,6 +33,27 @@ function abrirModalSenha(){
   }
 }
 
-abrirModalSenha();
+function submitCadastro(){
+  
+  const form = document.getElementById("formulario-cadastro");
+  
+  form.addEventListener("submit", function(event){
+    event.preventDefault();
+    const objeto = {
+      email: document.getElementById("email-cadastro").value,
+      nome: document.getElementById("nome-cadastro").value,
+      telefone: document.getElementById("telefone-cadastro").value,
+      endereco: document.getElementById("endereco-cadastro").value,
+      cpf: document.getElementById("cpf-cadastro").value,
+      senha: document.getElementById("senha-cadastro").value,
+    }
 
+    const objetoJson = JSON.stringify(objeto);
+    console.log(objetoJson);
+  });
+}
+
+
+submitCadastro();
+abrirModalSenha();
 abrirModalCadastro();
