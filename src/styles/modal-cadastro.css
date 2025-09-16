@@ -18,7 +18,7 @@
   width: 80%; 
   height: 100%;
   max-width: 600px;
-  max-height: 500px;
+  max-height: 600px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
@@ -43,14 +43,14 @@
 #modal-cadastro form {
   flex: 1;
   display: flex;
+  gap: 10px;
   flex-direction: column;
-  gap: 20px;
   padding: 10px;
   border-radius: 8px;
 }
 
 #modal-cadastro form input{
-  width: 300px;
+  width: 400px;
   height: 35px;
   border-radius: 5px;
   border: 1px solid #ccc;

@@ -33,6 +33,7 @@ function abrirModalSenha(){
   }
 }
 
+//Função para formatar os dados em JSON
 function submitCadastro(){
   
   const form = document.getElementById("formulario-cadastro");
