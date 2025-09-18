@@ -91,6 +91,9 @@ function submitSenha(){
     if(res.ok){
       alert("Usuario logado com sucesso!");
     }
+    else{
+      alert("Senha inválida! Tente novamente")
+    }
   });
 }
 
