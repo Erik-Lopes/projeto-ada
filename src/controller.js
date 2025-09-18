@@ -1,6 +1,7 @@
 document.getElementById("modal-senha").style.display = "none";
 document.getElementById("modal-cadastro").style.display = "none";
 
+
 function abrirModalCadastro(){
   // const btnCadastrar = document.getElementById("btnCadastrar");
   const span = document.querySelector(".cadastroClose");
@@ -36,7 +37,12 @@ function abrirModalSenha(){
   }
 }
 
-//Função para formatar os dados em JSON
+function fechaModalSenha(){
+  const modal = document.getElementById("modal-senha");
+  modal.style.display = "none";
+}
+
+//Função para cadastrar usuário
 function submitCadastro(){
   
   const form = document.getElementById("formulario-cadastro");
@@ -67,7 +73,7 @@ function submitCadastro(){
   });
 }
 
-//Função para formatar os dados em JSON
+//Função de Login
 function submitSenha(){
   
   const form = document.getElementById("form-senha");
@@ -80,16 +86,24 @@ function submitSenha(){
     }
 
     const objetoJson = JSON.stringify(objeto);
-    console.log(objetoJson);
-
+    
+    
     const res = await fetch("http://localhost:3000/api/login", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json",
+        "Authorization": 'Bearer ${email}'
+
+      },
       body: objetoJson
     });
-    console.log(res);
+    
     if(res.ok){
-      alert("Usuario logado com sucesso!");
+      // alert("Login realizado com sucesso!")
+      const { token } = await res.json();
+      localStorage.setItem('token', token);
+      retornaDados();
+      fechaModalSenha();
+      document.getElementById("email").value = "";
     }
     else{
       alert("Senha inválida! Tente novamente")
@@ -105,7 +119,6 @@ function validaEmail (){
     const email = document.getElementById("email").value;
     const res = await fetch(`http://localhost:3000/api/users/validate-email?email=${email}`);
 
-    console.log(res)
     if(res.status === 409){
       abrirModalSenha();
     }else{
@@ -115,10 +128,28 @@ function validaEmail (){
   });
 }
 
+
 validaEmail();
 submitCadastro();
 submitSenha();
 
+
 // submitCadastro();
 // abrirModalSenha();
 // abrirModalCadastro();
+
+async function retornaDados(){
+  
+    const res = await fetch("http://localhost:3000/api/users", {
+      method: "GET",
+      headers: { "Content-Type": "application/json", 
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+    });
+    
+    const dados = JSON.parse(JSON.stringify(await res.json()))
+
+    
+
+}
+
