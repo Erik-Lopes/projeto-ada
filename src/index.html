@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="../src/styles/index.css">
   <link rel="stylesheet" href="../src/styles/modal-senha.css">
   <link rel="stylesheet" href="../src/styles/modal-cadastro.css">
+  <link rel="stylesheet" href="../src/styles/modal-dados.css">
   <title>Cadastro de usuário</title>
 </head>
 <body>
@@ -54,6 +55,31 @@
         <input type="text" id="senha-cadastro" required>
         <button type="submit" class="btnCadastrar" id="botao-cadastrar">Cadastrar</button>
       </form>
+    </div>
+  </div>
+
+
+  <div id="modal-dados">
+    <div id="modal-dados-conteudo">
+      <span class="dadosClose">&times;</span>
+      <h2>Dados do Usuário</h2>
+      <form id="formulario-dados">
+        <label>E-mail:</label>
+        <input type="email" id="email-dados" readonly>
+        <label>Nome:</label>
+        <input type="text" id="nome-dados" readonly>
+        <label>Telefone:</label>
+        <input type="text" id="telefone-dados" readonly>
+        <label>Endereço:</label>
+        <input type="text" id="endereco-dados" readonly>
+        <label>CPF:</label>
+        <input type="text" id="cpf-dados" readonly>
+      </form>
+      <div class="botoes">
+        <button type="button" class="btnEditar" id="botao-editar-dados">Editar</button>
+        <button type="button" class="btnExcluir" id="botao-excluir-dados">Excluir</button>
+        <button type="submit" class="btnSalvar" id="botao-salvar-dados" style="display: none">Salvar</button>
+      </div>
     </div>
   </div>
 <script  type="module"  src="controller.js"></script>
