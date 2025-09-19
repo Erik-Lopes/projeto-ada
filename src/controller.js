@@ -99,7 +99,7 @@ function submitCadastro(){
       document.getElementById("email").value = "";
     }
     else{
-      alert("E-mail ou CPF já cadastrado na base! Tente novamente")
+      alert("CPF já cadastrado na base! Tente novamente")
     }
   });
 }
