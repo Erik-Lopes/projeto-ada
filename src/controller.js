@@ -255,7 +255,6 @@ async function editarUsuario(id){
   });
   if(res.ok){
     alert("Dados alterados com sucesso!")
-    document.getElementById("modal-dados").style.display = "none";
   }else{
     alert("Falha ao alterar dados do usuário! Tente novamente!")
   }
