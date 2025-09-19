@@ -2,14 +2,12 @@ document.getElementById("modal-senha").style.display = "none";
 document.getElementById("modal-cadastro").style.display = "none";
 document.getElementById("modal-dados").style.display = "none";
 
-
+//Abrir e fechar o modal do formulário de cadastro
 function abrirModalCadastro(){
-  // const btnCadastrar = document.getElementById("btnCadastrar");
   const span = document.querySelector(".cadastroClose");
   const modal = document.getElementById("modal-cadastro");
   document.getElementById("email-cadastro").value = document.getElementById("email").value;
 
-  // btnCadastrar.onclick = () => 
   modal.style.display = "block";
 
   span.onclick = () => modal.style.display = "none";
@@ -21,12 +19,11 @@ function abrirModalCadastro(){
   }
 }
 
+//Abrir e fechar o modal do formulário contendo os dados do usuário
 function abrirModalDados(){
-  // const btnCadastrar = document.getElementById("btnCadastrar");
   const span = document.querySelector(".dadosClose");
   const modal = document.getElementById("modal-dados");
 
-  // btnCadastrar.onclick = () => 
   modal.style.display = "block";
 
   span.onclick = () => modal.style.display = "none";
@@ -38,12 +35,11 @@ function abrirModalDados(){
   }
 }
 
+//Abrir o modal do formulário de senha
 function abrirModalSenha(){
-  // const btnSenha = document.getElementById("btnSenha");
   const span = document.querySelector(".senhaClose");
   const modal = document.getElementById("modal-senha");
 
-  // btnSenha.onclick = () => 
   modal.style.display = "block";
 
   span.onclick = () => modal.style.display = "none";
@@ -54,7 +50,19 @@ function abrirModalSenha(){
     }
   }
 }
+//Fechar o modal de dados do usuário 
+function fechaModalDados(){
+  const modal = document.getElementById("modal-dados");
+  modal.style.display = "none";
+}
 
+//Fechar o modal do cadastro de usuário 
+function fechaModalCadastro(){
+  const modal = document.getElementById("modal-cadastro");
+  modal.style.display = "none";
+}
+
+//Fechar o modal do formulário de senha
 function fechaModalSenha(){
   const modal = document.getElementById("modal-senha");
   modal.style.display = "none";
@@ -87,6 +95,11 @@ function submitCadastro(){
     console.log(res);
     if(res.ok){
       alert("Usuario cadastrado com sucesso!");
+      fechaModalCadastro();
+      document.getElementById("email").value = "";
+    }
+    else{
+      alert("E-mail ou CPF já cadastrado na base! Tente novamente")
     }
   });
 }
@@ -105,7 +118,6 @@ function submitSenha(){
 
     const objetoJson = JSON.stringify(objeto);
     
-    
     const res = await fetch("http://localhost:3000/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json",
@@ -115,7 +127,6 @@ function submitSenha(){
     });
     
     if(res.ok){
-      // alert("Login realizado com sucesso!")
       const { token } = await res.json();
       localStorage.setItem('token', token);
       retornaDados();
@@ -130,6 +141,7 @@ function submitSenha(){
   });
 }
 
+//Função para verificação de e-mail na base de dados
 function validaEmail (){
   const form = document.getElementById("insere-email");
   
@@ -143,10 +155,10 @@ function validaEmail (){
     }else{
       abrirModalCadastro();
     }
-  
   });
 }
 
+//Função para retornar e apresentar os dados do usuário logado
 async function retornaDados(){
   
   const btnExcluir = document.getElementById("botao-excluir-dados");
@@ -205,6 +217,7 @@ async function retornaDados(){
   });
 }
 
+//Função para excluir usuário da base
 async function excluirUsuario(id){
   
   const res = await fetch(`http://localhost:3000/api/users/${id}`, {
@@ -214,11 +227,15 @@ async function excluirUsuario(id){
     },
   });
   if(res.ok){
-    alert("Usuário excluido com sucesso!")
+    alert("Usuário excluído com sucesso!")
+    fechaModalDados();
     localStorage.removeItem('token');
+  }else{
+    alert("Falha ao tentar excluir o usuário! Tente novamente!")
   }
 }
 
+//Função para editar usuário na base
 async function editarUsuario(id){
   
   const objeto = {
@@ -239,6 +256,8 @@ async function editarUsuario(id){
   if(res.ok){
     alert("Dados alterados com sucesso!")
     document.getElementById("modal-dados").style.display = "none";
+  }else{
+    alert("Falha ao alterar dados do usuário! Tente novamente!")
   }
 }
 
