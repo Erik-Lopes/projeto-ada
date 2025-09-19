@@ -181,7 +181,7 @@ async function retornaDados(){
   document.getElementById("endereco-dados").value = dados.endereco;
   document.getElementById("cpf-dados").value = dados.cpf;
 
-  btnEditar.addEventListener("click", function(event){
+  btnEditar.addEventListener("click", async function(event){
     event.preventDefault();
     
     if(btnEditar.textContent == "Editar"){
@@ -198,6 +198,14 @@ async function retornaDados(){
       inputs.forEach(input => {
         input.readOnly = !input.readOnly;
       });
+      const res = await fetch("http://localhost:3000/api/users", {
+        method: "GET",
+        headers: { "Content-Type": "application/json", 
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+      });
+        
+      const dados = JSON.parse(JSON.stringify(await res.json()))
       document.getElementById("nome-dados").value = dados.nome;
       document.getElementById("email-dados").value = dados.email;
       document.getElementById("telefone-dados").value = dados.telefone;
@@ -214,6 +222,12 @@ async function retornaDados(){
   btnSalvar.addEventListener("click", function(event){
     event.preventDefault();
     editarUsuario(dados.id)
+    btnEditar.textContent = "Editar";
+    btnSalvar.style.display = "none";
+    btnExcluir.style.display = "block";
+    inputs.forEach(input => {
+      input.readOnly = !input.readOnly;
+    });
   });
 }
 
