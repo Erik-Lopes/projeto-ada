@@ -75,6 +75,12 @@ function submitCadastro(){
   
   form.addEventListener("submit", async function(event){
     event.preventDefault();
+    let flag = true;
+    const senhaCadastro = document.getElementById("senha-cadastro").value;
+    const temMaiuscula = /[A-Z]/.test(senhaCadastro);
+    const temNumero = /[0-9]/.test(senhaCadastro);
+    const tamanhoValido = senhaCadastro.length;
+
     const objeto = {
       email: document.getElementById("email-cadastro").value,
       nome: document.getElementById("nome-cadastro").value,
@@ -84,22 +90,40 @@ function submitCadastro(){
       senha: document.getElementById("senha-cadastro").value,
     }
 
-    const objetoJson = JSON.stringify(objeto);
-    console.log(objetoJson);
-
-    const res = await fetch("http://localhost:3000/api/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: objetoJson
-    });
-    console.log(res);
-    if(res.ok){
-      alert("Usuario cadastrado com sucesso!");
-      fechaModalCadastro();
-      document.getElementById("email").value = "";
+    if(document.getElementById("nome-cadastro").value.length < 3){
+      alert("O nome deve conter no mínimo 3 caracteres! Tente novamente.");
+      flag = false;
+    }else{
+      if(document.getElementById("endereco-cadastro").value.length < 3){
+        alert("O endereço deve conter no mínimo 3 caracteres! Tente novamente.");
+        flag = false;
+      }
+      else{
+        if(!temMaiuscula || !temNumero || tamanhoValido < 8){
+          alert("A senha deve conter no mínimo 8 caracteres, com pelo menos uma letra maiúscula e um número! Tente novamente.");
+          flag = false;
+        }
+      }
     }
-    else{
-      alert("CPF já cadastrado na base! Tente novamente")
+    
+    if(flag){
+      const objetoJson = JSON.stringify(objeto);
+      console.log(objetoJson);
+
+      const res = await fetch("http://localhost:3000/api/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: objetoJson
+      });
+      console.log(res);
+      if(res.ok){
+        alert("Usuario cadastrado com sucesso!");
+        fechaModalCadastro();
+        document.getElementById("email").value = "";
+      }
+      else{
+        alert("CPF já cadastrado na base! Tente novamente")
+      }
     }
   });
 }
